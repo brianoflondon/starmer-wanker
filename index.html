@@ -107,39 +107,14 @@
         let parliamentMembers = {}; // normalised name -> { id }
 
 
-        async function lookupMPByName(name) {
+        async function loadParliamentData() {
             try {
-                const url = `https://members-api.parliament.uk/api/Members/Search?Name=${encodeURIComponent(name)}&House=1&skip=0&take=5`;
-                const response = await fetch(url);
+                const response = await fetch('parliament-data.json');
                 const data = await response.json();
-                if (!data.items?.length) return;
-
-                // Pick the best match: exact nameDisplayAs or nameListAs (case-insensitive)
-                const nameLower = name.toLowerCase();
-                const match = data.items.find(item => {
-                    const m = item.value;
-                    return m.nameDisplayAs.toLowerCase() === nameLower ||
-                        m.nameListAs.toLowerCase() === nameLower ||
-                        m.nameDisplayAs.replace(/^(Sir|Dame|Dr|Mr|Mrs|Ms|Miss)\s+/i, '').toLowerCase() === nameLower;
-                }) || data.items[0]; // fall back to first result
-
-                const m = match.value;
-                parliamentMembers[nameLower] = {
-                    id: m.id,
-                    constituency: m.latestHouseMembership?.membershipFrom || ''
-                };
+                Object.assign(parliamentMembers, data.members || {});
+                if (allMPs.length > 0) filterList();
             } catch (e) {
-                // silently skip if lookup fails for one name
-            }
-        }
-
-        async function loadParliamentData(names) {
-            // Run lookups with concurrency of 5
-            const concurrency = 5;
-            for (let i = 0; i < names.length; i += concurrency) {
-                await Promise.all(names.slice(i, i + concurrency).map(lookupMPByName));
-                // Re-render progressively every batch
-                filterList();
+                console.warn('Parliament data unavailable', e);
             }
         }
 
@@ -187,8 +162,7 @@
             renderList(allMPs);
             document.getElementById('last-updated').textContent = 'Updated moments ago';
 
-            // Look up each MP in the Parliament API
-            loadParliamentData(allMPs.map(mp => mp.name));
+            loadParliamentData();
         }
 
         function updateStats() {
@@ -240,6 +214,8 @@
 
             if (currentSort === 'alpha') {
                 filtered = [...filtered].sort((a, b) => a.name.localeCompare(b.name));
+            } else if (currentSort === 'reverse') {
+                filtered = [...filtered].reverse();
             }
 
             renderList(filtered);
@@ -250,6 +226,10 @@
                 currentSort = 'alpha';
                 document.getElementById('sort-icon').className = 'fa-solid fa-sort-alpha-down';
                 document.getElementById('sort-text').textContent = 'Sort A-Z';
+            } else if (currentSort === 'alpha') {
+                currentSort = 'reverse';
+                document.getElementById('sort-icon').className = 'fa-solid fa-arrow-down-wide-short';
+                document.getElementById('sort-text').textContent = 'Reverse Order';
             } else {
                 currentSort = 'original';
                 document.getElementById('sort-icon').className = 'fa-solid fa-list-ol';

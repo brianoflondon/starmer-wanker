@@ -1,0 +1,34 @@
+name: Update Parliament Data
+
+on:
+  schedule:
+    - cron: "0 */6 * * *"   # every 6 hours
+  push:
+    paths:
+      - "scripts/update_parliament_data.py"
+      - ".github/workflows/update-parliament-data.yml"
+  workflow_dispatch:
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Run Parliament data update
+        run: python scripts/update_parliament_data.py
+
+      - name: Commit updated data
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add parliament-data.json
+          git diff --staged --quiet || git commit -m "chore: update parliament data [skip ci]"
+          git push

@@ -1,0 +1,313 @@
+{
+  "updated": "2026-05-12T08:46:19.721040+00:00",
+  "members": {
+    "sarah owen": {
+      "id": 4777,
+      "constituency": "Luton North"
+    },
+    "connor naismith": {
+      "id": 5273,
+      "constituency": "Crewe and Nantwich"
+    },
+    "david baines": {
+      "id": 5092,
+      "constituency": "St Helens North"
+    },
+    "john mcdonnell": {
+      "id": 178,
+      "constituency": "Hayes and Harlington"
+    },
+    "ian lavery": {
+      "id": 4139,
+      "constituency": "Blyth and Ashington"
+    },
+    "clive lewis": {
+      "id": 4500,
+      "constituency": "Norwich South"
+    },
+    "jonathan brash": {
+      "id": 5045,
+      "constituency": "Hartlepool"
+    },
+    "louise haigh": {
+      "id": 4473,
+      "constituency": "Sheffield Heeley"
+    },
+    "anneliese midgley": {
+      "id": 5038,
+      "constituency": "Knowsley"
+    },
+    "simon opher": {
+      "id": 5030,
+      "constituency": "Stroud"
+    },
+    "richard burgon": {
+      "id": 4493,
+      "constituency": "Leeds East"
+    },
+    "olivia blake": {
+      "id": 4864,
+      "constituency": "Sheffield Hallam"
+    },
+    "paula barker": {
+      "id": 4828,
+      "constituency": "Liverpool Wavertree"
+    },
+    "ian byrne": {
+      "id": 4831,
+      "constituency": "Liverpool West Derby"
+    },
+    "neil duncan-jordan": {
+      "id": 5359,
+      "constituency": "Poole"
+    },
+    "apsana begum": {
+      "id": 4790,
+      "constituency": "Poplar and Limehouse"
+    },
+    "kim johnson": {
+      "id": 4824,
+      "constituency": "Liverpool Riverside"
+    },
+    "ruth jones": {
+      "id": 4716,
+      "constituency": "Newport West and Islwyn"
+    },
+    "andy mcdonald": {
+      "id": 4269,
+      "constituency": "Middlesbrough and Thornaby East"
+    },
+    "kate osborne": {
+      "id": 4783,
+      "constituency": "Jarrow and Gateshead East"
+    },
+    "jon trickett": {
+      "id": 410,
+      "constituency": "Normanton and Hemsworth"
+    },
+    "nadia whittome": {
+      "id": 4869,
+      "constituency": "Nottingham East"
+    },
+    "beccy cooper": {
+      "id": 5307,
+      "constituency": "Worthing West"
+    },
+    "tony vaughan": {
+      "id": 5067,
+      "constituency": "Folkestone and Hythe"
+    },
+    "barry gardiner": {
+      "id": 146,
+      "constituency": "Brent West"
+    },
+    "emma lewell": {
+      "id": 4277,
+      "constituency": "South Shields"
+    },
+    "josh simons": {
+      "id": 5060,
+      "constituency": "Makerfield"
+    },
+    "irene campbell": {
+      "id": 5145,
+      "constituency": "North Ayrshire and Arran"
+    },
+    "cat eccles": {
+      "id": 5293,
+      "constituency": "Stourbridge"
+    },
+    "anna dixon": {
+      "id": 5281,
+      "constituency": "Shipley"
+    },
+    "justin madders": {
+      "id": 4418,
+      "constituency": "Ellesmere Port and Bromborough"
+    },
+    "terry jermy": {
+      "id": 5338,
+      "constituency": "South West Norfolk"
+    },
+    "imran hussain": {
+      "id": 4394,
+      "constituency": "Bradford East"
+    },
+    "euan stainbank": {
+      "id": 5110,
+      "constituency": "Falkirk"
+    },
+    "graham stringer": {
+      "id": 449,
+      "constituency": "Blackley and Middleton South"
+    },
+    "rachael maskell": {
+      "id": 4471,
+      "constituency": "York Central"
+    },
+    "debbie abrahams": {
+      "id": 4212,
+      "constituency": "Oldham East and Saddleworth"
+    },
+    "peter lamb": {
+      "id": 5345,
+      "constituency": "Crawley"
+    },
+    "brian leishman": {
+      "id": 5196,
+      "constituency": "Alloa and Grangemouth"
+    },
+    "julia buckley": {
+      "id": 5171,
+      "constituency": "Shrewsbury"
+    },
+    "paulette hamilton": {
+      "id": 4938,
+      "constituency": "Birmingham Erdington"
+    },
+    "catherine mckinnell": {
+      "id": 4125,
+      "constituency": "Newcastle upon Tyne North"
+    },
+    "navendu mishra": {
+      "id": 4811,
+      "constituency": "Stockport"
+    },
+    "bell ribeiro-addy": {
+      "id": 4764,
+      "constituency": "Clapham and Brixton Hill"
+    },
+    "david smith": {
+      "id": 5218,
+      "constituency": "North Northumberland"
+    },
+    "chris curtis": {
+      "id": 5118,
+      "constituency": "Milton Keynes North"
+    },
+    "luke myer": {
+      "id": 5147,
+      "constituency": "Middlesbrough South and East Cleveland"
+    },
+    "markus campbell-savours": {
+      "id": 5124,
+      "constituency": "Penrith and Solway"
+    },
+    "alan gemmell": {
+      "id": 5185,
+      "constituency": "Central Ayrshire"
+    },
+    "fred thomas": {
+      "id": 5174,
+      "constituency": "Plymouth Moor View"
+    },
+    "lorraine beavers": {
+      "id": 5232,
+      "constituency": "Blackpool North and Fleetwood"
+    },
+    "jas athwal": {
+      "id": 5227,
+      "constituency": "Ilford South"
+    },
+    "sarah smith": {
+      "id": 5117,
+      "constituency": "Hyndburn"
+    },
+    "jo platt": {
+      "id": 4673,
+      "constituency": "Leigh and Atherton"
+    },
+    "alex ballinger": {
+      "id": 5238,
+      "constituency": "Halesowen"
+    },
+    "sally jameson": {
+      "id": 5178,
+      "constituency": "Doncaster Central"
+    },
+    "joe morris": {
+      "id": 5081,
+      "constituency": "Hexham"
+    },
+    "tom rutland": {
+      "id": 5222,
+      "constituency": "East Worthing and Shoreham"
+    },
+    "sam carling": {
+      "id": 5308,
+      "constituency": "North West Cambridgeshire"
+    },
+    "naushabah khan": {
+      "id": 5215,
+      "constituency": "Gillingham and Rainham"
+    },
+    "yuan yang": {
+      "id": 5267,
+      "constituency": "Earley and Woodley"
+    },
+    "lee pitcher": {
+      "id": 5233,
+      "constituency": "Doncaster East and the Isle of Axholme"
+    },
+    "rachel taylor": {
+      "id": 5065,
+      "constituency": "North Warwickshire and Bedworth"
+    },
+    "melanie ward": {
+      "id": 5240,
+      "constituency": "Cowdenbeath and Kirkcaldy"
+    },
+    "charlotte nichols": {
+      "id": 4799,
+      "constituency": "Warrington North"
+    },
+    "alex mcintyre": {
+      "id": 5349,
+      "constituency": "Gloucester"
+    },
+    "mary kelly foy": {
+      "id": 4753,
+      "constituency": "City of Durham"
+    },
+    "ben goldsborough": {
+      "id": 5205,
+      "constituency": "South Norfolk"
+    },
+    "maureen burke": {
+      "id": 5137,
+      "constituency": "Glasgow North East"
+    },
+    "matt bishop": {
+      "id": 5323,
+      "constituency": "Forest of Dean"
+    },
+    "jonathan hinder": {
+      "id": 5264,
+      "constituency": "Pendle and Clitheroe"
+    },
+    "sarah hall": {
+      "id": 5154,
+      "constituency": "Warrington South"
+    },
+    "gordon mckee": {
+      "id": 5189,
+      "constituency": "Glasgow South"
+    },
+    "james asser": {
+      "id": 5211,
+      "constituency": "West Ham and Beckton"
+    },
+    "richard baker": {
+      "id": 5253,
+      "constituency": "Glenrothes and Mid Fife"
+    },
+    "miatta fahnbulleh": {
+      "id": 5099,
+      "constituency": "Peckham"
+    },
+    "paul foster": {
+      "id": 5074,
+      "constituency": "South Ribble"
+    }
+  }
+}
