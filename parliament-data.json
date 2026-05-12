@@ -1,6 +1,10 @@
 {
-  "updated": "2026-05-12T13:27:48.773321+00:00",
+  "updated": "2026-05-12T14:47:26.321645+00:00",
   "members": {
+    "sarah owen": {
+      "id": 4777,
+      "constituency": "Luton North"
+    },
     "connor naismith": {
       "id": 5273,
       "constituency": "Crewe and Nantwich"
@@ -32,6 +36,10 @@
     "anneliese midgley": {
       "id": 5038,
       "constituency": "Knowsley"
+    },
+    "simon opher": {
+      "id": 5030,
+      "constituency": "Stroud"
     },
     "richard burgon": {
       "id": 4493,
@@ -65,6 +73,10 @@
       "id": 4824,
       "constituency": "Liverpool Riverside"
     },
+    "ruth jones": {
+      "id": 4716,
+      "constituency": "Newport West and Islwyn"
+    },
     "andy mcdonald": {
       "id": 4269,
       "constituency": "Middlesbrough and Thornaby East"
@@ -85,7 +97,7 @@
       "id": 5307,
       "constituency": "Worthing West"
     },
-    "catheine west": {
+    "catherine west": {
       "id": 4523,
       "constituency": "Hornsey and Friern Barnet"
     },
@@ -97,9 +109,13 @@
       "id": 146,
       "constituency": "Brent West"
     },
-    "abitsam mohamed": {
+    "abtisam mohamed": {
       "id": 5142,
       "constituency": "Sheffield Central"
+    },
+    "emma lewell": {
+      "id": 4277,
+      "constituency": "South Shields"
     },
     "josh simons": {
       "id": 5060,
@@ -133,6 +149,10 @@
       "id": 5110,
       "constituency": "Falkirk"
     },
+    "graham stringer": {
+      "id": 449,
+      "constituency": "Blackley and Middleton South"
+    },
     "rachael maskell": {
       "id": 4471,
       "constituency": "York Central"
@@ -164,6 +184,10 @@
     "navendu mishra": {
       "id": 4811,
       "constituency": "Stockport"
+    },
+    "bell ribeiro-addy": {
+      "id": 4764,
+      "constituency": "Clapham and Brixton Hill"
     },
     "david smith": {
       "id": 5218,
@@ -209,6 +233,10 @@
       "id": 4673,
       "constituency": "Leigh and Atherton"
     },
+    "alex ballinger": {
+      "id": 5238,
+      "constituency": "Halesowen"
+    },
     "sally jameson": {
       "id": 5178,
       "constituency": "Doncaster Central"
@@ -245,6 +273,10 @@
       "id": 5065,
       "constituency": "North Warwickshire and Bedworth"
     },
+    "melanie ward": {
+      "id": 5240,
+      "constituency": "Cowdenbeath and Kirkcaldy"
+    },
     "charlotte nichols": {
       "id": 4799,
       "constituency": "Warrington North"
@@ -273,6 +305,10 @@
       "id": 5264,
       "constituency": "Pendle and Clitheroe"
     },
+    "sarah hall": {
+      "id": 5154,
+      "constituency": "Warrington South"
+    },
     "gordon mckee": {
       "id": 5189,
       "constituency": "Glasgow South"
@@ -297,6 +333,10 @@
       "id": 4396,
       "constituency": "Salford"
     },
+    "lizzi collinge": {
+      "id": 5225,
+      "constituency": "Morecambe and Lunesdale"
+    },
     "alex sobel": {
       "id": 4658,
       "constituency": "Leeds Central and Headingley"
@@ -308,6 +348,10 @@
     "alex davies-jones": {
       "id": 4849,
       "constituency": "Pontypridd"
+    },
+    "josh fenton-glynn": {
+      "id": 5295,
+      "constituency": "Calder Valley"
     }
   }
 }

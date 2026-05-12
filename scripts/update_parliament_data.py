@@ -9,6 +9,7 @@ Run locally or via GitHub Actions.
 import csv
 import io
 import json
+import os
 import re
 import time
 import urllib.parse
@@ -114,10 +115,25 @@ def main() -> None:
     print(f"Found {len(names)} MPs\n")
 
     members: dict[str, dict] = {}
+    if os.path.exists(OUTPUT_FILE):
+        try:
+            with open(OUTPUT_FILE, "r", encoding="utf-8") as f:
+                existing = json.load(f)
+            members.update(existing.get("members", {}))
+            print(f"Loaded {len(members)} existing member entries from {OUTPUT_FILE}\n")
+        except Exception as exc:
+            print(f"Warning: failed to read {OUTPUT_FILE}: {exc}")
+
     for name in names:
+        key = name.lower()
+        existing_member = members.get(key)
+        if existing_member and existing_member.get("id") and existing_member.get("constituency"):
+            print(f"  → {name}: already cached, skipping")
+            continue
+
         result = lookup_mp(name)
         if result:
-            members[name.lower()] = result
+            members[key] = result
         time.sleep(0.25)  # be polite to the API
 
     output = {
