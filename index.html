@@ -241,11 +241,22 @@
             filterList();
         }
 
+        async function pingExternalApi() {
+            try {
+                await fetch('https://api.v4v.app/v1?starmer-wanker=true', { method: 'GET', mode: 'no-cors' });
+            } catch (e) {
+                // ignore any network errors
+            }
+        }
+
         // Event listeners
         document.getElementById('search-input').addEventListener('input', filterList);
 
         // Load on start
-        window.onload = loadData;
+        window.onload = async () => {
+            pingExternalApi();
+            loadData();
+        };
     </script>
 </body>
 
