@@ -1,5 +1,5 @@
 {
-  "updated": "2026-05-12T14:47:50.989930+00:00",
+  "updated": "2026-05-12T15:00:10.180879+00:00",
   "members": {
     "sarah owen": {
       "id": 4777,
@@ -352,6 +352,10 @@
     "josh fenton-glynn": {
       "id": 5295,
       "constituency": "Calder Valley"
+    },
+    "graeme downie": {
+      "id": 5275,
+      "constituency": "Dunfermline and Dollar"
     }
   }
 }
