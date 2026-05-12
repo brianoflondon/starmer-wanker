@@ -70,8 +70,8 @@
                 <div class="flex gap-3 w-full sm:w-auto">
                     <button onclick="toggleSort()" id="sort-btn"
                         class="flex-1 sm:flex-none px-5 py-3 bg-zinc-800 hover:bg-zinc-700 border border-zinc-700 rounded-xl flex items-center justify-center gap-2 transition-colors">
-                        <i id="sort-icon" class="fa-solid fa-list-ol"></i>
-                        <span id="sort-text" class="hidden sm:inline">Original Order</span>
+                        <i id="sort-icon" class="fa-solid fa-arrow-down-wide-short"></i>
+                        <span id="sort-text" class="hidden sm:inline">Reverse Order</span>
                     </button>
                 </div>
             </div>
@@ -103,7 +103,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
     <script>
         let allMPs = [];
-        let currentSort = 'original';
+        let currentSort = 'reverse';
         let parliamentMembers = {}; // normalised name -> { id }
 
 
@@ -159,7 +159,7 @@
             });
 
             updateStats();
-            renderList(allMPs);
+            filterList();
             document.getElementById('last-updated').textContent = 'Updated moments ago';
 
             loadParliamentData();
@@ -207,9 +207,12 @@
             let filtered = allMPs;
 
             if (searchTerm) {
-                filtered = filtered.filter(mp =>
-                    mp.name.toLowerCase().includes(searchTerm)
-                );
+                filtered = filtered.filter(mp => {
+                    const nameMatch = mp.name.toLowerCase().includes(searchTerm);
+                    const member = parliamentMembers[mp.name.toLowerCase()];
+                    const constituencyMatch = member?.constituency?.toLowerCase().includes(searchTerm);
+                    return nameMatch || constituencyMatch;
+                });
             }
 
             if (currentSort === 'alpha') {
@@ -222,18 +225,18 @@
         }
 
         function toggleSort() {
-            if (currentSort === 'original') {
-                currentSort = 'alpha';
-                document.getElementById('sort-icon').className = 'fa-solid fa-sort-alpha-down';
-                document.getElementById('sort-text').textContent = 'Sort A-Z';
-            } else if (currentSort === 'alpha') {
-                currentSort = 'reverse';
-                document.getElementById('sort-icon').className = 'fa-solid fa-arrow-down-wide-short';
-                document.getElementById('sort-text').textContent = 'Reverse Order';
-            } else {
+            if (currentSort === 'reverse') {
                 currentSort = 'original';
                 document.getElementById('sort-icon').className = 'fa-solid fa-list-ol';
                 document.getElementById('sort-text').textContent = 'Original Order';
+            } else if (currentSort === 'original') {
+                currentSort = 'alpha';
+                document.getElementById('sort-icon').className = 'fa-solid fa-sort-alpha-down';
+                document.getElementById('sort-text').textContent = 'Sort A-Z';
+            } else {
+                currentSort = 'reverse';
+                document.getElementById('sort-icon').className = 'fa-solid fa-arrow-down-wide-short';
+                document.getElementById('sort-text').textContent = 'Reverse Order';
             }
             filterList();
         }
