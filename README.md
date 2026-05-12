@@ -44,3 +44,5 @@ npx tailwindcss -i input.css -o tailwind.css --content './index.html' --minify
 ### Updating the MP list
 
 Edit the [Google Sheet](https://docs.google.com/spreadsheets/d/1OBYlmRwHPlRa9Lsk6nTGlgX7Ixn1C3oX6v-f6ogZDEI) — one MP name per row. The site fetches it live on every page load, no deploy needed.
+
+bump
