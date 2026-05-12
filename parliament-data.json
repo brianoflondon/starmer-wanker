@@ -1,5 +1,5 @@
 {
-  "updated": "2026-05-12T13:18:03.972127+00:00",
+  "updated": "2026-05-12T13:21:15.500655+00:00",
   "members": {
     "sarah owen": {
       "id": 4777,
@@ -65,6 +65,10 @@
       "id": 4790,
       "constituency": "Poplar and Limehouse"
     },
+    "chris hinchcliff": {
+      "id": 5244,
+      "constituency": "North East Hertfordshire"
+    },
     "kim johnson": {
       "id": 4824,
       "constituency": "Liverpool Riverside"
@@ -93,6 +97,10 @@
       "id": 5307,
       "constituency": "Worthing West"
     },
+    "catheine west": {
+      "id": 4523,
+      "constituency": "Hornsey and Friern Barnet"
+    },
     "tony vaughan": {
       "id": 5067,
       "constituency": "Folkestone and Hythe"
@@ -100,6 +108,10 @@
     "barry gardiner": {
       "id": 146,
       "constituency": "Brent West"
+    },
+    "abitsam mohamed": {
+      "id": 5142,
+      "constituency": "Sheffield Central"
     },
     "emma lewell": {
       "id": 4277,
@@ -237,6 +249,10 @@
       "id": 5222,
       "constituency": "East Worthing and Shoreham"
     },
+    "antonia antoniazzi": {
+      "id": 4623,
+      "constituency": "Gower"
+    },
     "sam carling": {
       "id": 5308,
       "constituency": "North West Cambridgeshire"
@@ -312,6 +328,10 @@
     "paul foster": {
       "id": 5074,
       "constituency": "South Ribble"
+    },
+    "rebecca long-bailey": {
+      "id": 4396,
+      "constituency": "Salford"
     },
     "lizzi collinge": {
       "id": 5225,

@@ -23,6 +23,29 @@ PARLIAMENT_API = "https://members-api.parliament.uk/api/Members/Search"
 OUTPUT_FILE = "parliament-data.json"
 HONORIFICS = re.compile(r"^(Sir|Dame|Dr|Mr|Mrs|Ms|Miss)\s+", re.IGNORECASE)
 
+PARLIAMENT_MEMBER_EXCEPTIONS = {
+    "chris hinchcliff": {
+        "id": 5244,
+        "constituency": "North East Hertfordshire",
+    },
+    "catheine west": {
+        "id": 4523,
+        "constituency": "Hornsey and Friern Barnet",
+    },
+    "abitsam mohamed": {
+        "id": 5142,
+        "constituency": "Sheffield Central",
+    },
+    "antonia antoniazzi": {
+        "id": 4623,
+        "constituency": "Gower",
+    },
+    "rebecca long-bailey": {
+        "id": 4396,
+        "constituency": "Salford",
+    },
+}
+
 
 def fetch_mp_names() -> list[str]:
     req = urllib.request.Request(SHEET_CSV, headers={"User-Agent": "Mozilla/5.0"})
@@ -47,6 +70,11 @@ def fetch_mp_names() -> list[str]:
 
 
 def lookup_mp(name: str) -> dict | None:
+    name_lower = name.lower()
+    if name_lower in PARLIAMENT_MEMBER_EXCEPTIONS:
+        print(f"  ⟳ {name}: exception mapping used")
+        return PARLIAMENT_MEMBER_EXCEPTIONS[name_lower]
+
     url = f"{PARLIAMENT_API}?Name={urllib.parse.quote(name)}&House=1&skip=0&take=5"
     try:
         req = urllib.request.Request(url, headers={"Accept": "application/json"})
@@ -61,7 +89,6 @@ def lookup_mp(name: str) -> dict | None:
         print(f"  – {name}: no results")
         return None
 
-    name_lower = name.lower()
     stripped = HONORIFICS.sub("", name_lower)
 
     match = next(

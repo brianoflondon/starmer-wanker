@@ -195,14 +195,38 @@
                     ? String(numberValue - 1)
                     : rawNumber;
                 const nameCell = String(row[1] || '').trim();
+                const titleCell = String(row[2] || '').trim();
                 if (!nameCell) return;
 
+                const titleNormalized = titleCell.toUpperCase();
+                if (titleNormalized === 'PRE-SPEECH' || titleNormalized === 'POST-SPEECH') return;
+
                 const name = nameCell.includes(',') ? nameCell.split(',')[0].trim() : nameCell;
+
+                let extraTitle = '';
+                if (titleCell) {
+                    const parts = titleCell.split(',').map(part => part.trim()).filter(Boolean);
+                    const ministerPart = parts.find(part => /minister/i.test(part));
+                    const chairPart = parts.find(part => /chair of/i.test(part));
+                    const ppsPart = parts.find(part => /\bpps\b/i.test(part));
+
+                    if (ministerPart) {
+                        extraTitle = 'Minister';
+                    } else if (chairPart) {
+                        extraTitle = chairPart;
+                    } else if (ppsPart && parts.length > 1) {
+                        extraTitle = parts[parts.length - 1];
+                    } else {
+                        extraTitle = parts[0] || '';
+                    }
+                }
 
                 allMPs.push({
                     number: number,
                     name: name,
-                    raw: nameCell
+                    raw: nameCell,
+                    extraTitle: extraTitle,
+                    hasExtraTitle: Boolean(extraTitle)
                 });
             });
 
@@ -229,7 +253,11 @@
             const html = mpList.map(mp => {
                 const member = getParliamentMember(mp.name);
                 const correctedName = getDisplayName(mp.name);
-                const displayName = mp.number ? `${correctedName} (${mp.number})` : correctedName;
+                const titleSuffix = mp.extraTitle ? `, ${mp.extraTitle}` : '';
+                const displayName = mp.number ? `${correctedName}${titleSuffix} (${mp.number})` : `${correctedName}${titleSuffix}`;
+                const cardClasses = mp.hasExtraTitle
+                    ? 'group bg-[#2f0000] hover:bg-[#500505] border border-red-900/90 rounded-2xl p-6 mb-4 transition-all flex items-center justify-between'
+                    : 'group bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 hover:border-red-900/50 rounded-2xl p-6 mb-4 transition-all flex items-center justify-between';
                 const nameHtml = member
                     ? `<a href="https://members.parliament.uk/member/${member.id}" target="_blank" rel="noopener" class="hover:text-red-400 underline decoration-red-900/50 underline-offset-2 transition-colors">${displayName}</a>`
                     : displayName;
@@ -237,7 +265,7 @@
                     ? `<div class="text-sm text-zinc-400 mt-1">${member.constituency}</div>`
                     : '';
                 return `
-                <div class="group bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 hover:border-red-900/50 rounded-2xl p-6 mb-4 transition-all flex items-center justify-between">
+                <div class="${cardClasses}">
                     <div>
                         <div class="text-xl font-semibold">${nameHtml}</div>
                         ${constituencyHtml}
