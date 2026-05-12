@@ -5,6 +5,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Labour MPs Calling for Starmer to Resign</title>
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Labour MPs Calling for Starmer to Resign">
+    <meta property="og:description" content="Live-updating list of Labour MPs publicly calling for Keir Starmer to resign as Prime Minister.">
+    <meta property="og:image" content="https://brianoflondon.github.io/starmer-wanker/banner.png">
+    <meta property="og:image:alt" content="Labour MPs Calling for Starmer to Resign">
+
+    <!-- Twitter / X Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Labour MPs Calling for Starmer to Resign">
+    <meta name="twitter:description" content="Live-updating list of Labour MPs publicly calling for Keir Starmer to resign as Prime Minister.">
+    <meta name="twitter:image" content="https://brianoflondon.github.io/starmer-wanker/banner.png">
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
@@ -91,30 +105,39 @@
         let parliamentMembers = {}; // normalised name -> { id }
 
 
-        async function loadParliamentData() {
+        async function lookupMPByName(name) {
             try {
-                // Fetch all current Commons members in one call (max 650 seats)
-                const url = 'https://members-api.parliament.uk/api/Members/Search?House=1&IsCurrentMember=true&take=650&skip=0';
+                const url = `https://members-api.parliament.uk/api/Members/Search?Name=${encodeURIComponent(name)}&House=1&skip=0&take=5`;
                 const response = await fetch(url);
                 const data = await response.json();
+                if (!data.items?.length) return;
 
-                data.items.forEach(item => {
+                // Pick the best match: exact nameDisplayAs or nameListAs (case-insensitive)
+                const nameLower = name.toLowerCase();
+                const match = data.items.find(item => {
                     const m = item.value;
-                    const entry = { id: m.id, constituency: m.latestHouseMembership?.membershipFrom || '' };
-                    // Index by display name ("Firstname Lastname") and list name ("Lastname, Firstname")
-                    parliamentMembers[m.nameDisplayAs.toLowerCase()] = entry;
-                    parliamentMembers[m.nameListAs.toLowerCase()] = entry;
-                    // Also index without honorifics (strip leading "Sir ", "Dame ", "Dr ", "Mr ", "Ms ")
-                    const stripped = m.nameDisplayAs.replace(/^(Sir|Dame|Dr|Mr|Mrs|Ms|Miss)\s+/i, '').toLowerCase();
-                    if (stripped !== m.nameDisplayAs.toLowerCase()) {
-                        parliamentMembers[stripped] = entry;
-                    }
-                });
+                    return m.nameDisplayAs.toLowerCase() === nameLower ||
+                           m.nameListAs.toLowerCase() === nameLower ||
+                           m.nameDisplayAs.replace(/^(Sir|Dame|Dr|Mr|Mrs|Ms|Miss)\s+/i, '').toLowerCase() === nameLower;
+                }) || data.items[0]; // fall back to first result
 
-                // Re-render once Parliament data is available
-                if (allMPs.length > 0) filterList();
+                const m = match.value;
+                parliamentMembers[nameLower] = {
+                    id: m.id,
+                    constituency: m.latestHouseMembership?.membershipFrom || ''
+                };
             } catch (e) {
-                console.warn('Parliament API unavailable', e);
+                // silently skip if lookup fails for one name
+            }
+        }
+
+        async function loadParliamentData(names) {
+            // Run lookups with concurrency of 5
+            const concurrency = 5;
+            for (let i = 0; i < names.length; i += concurrency) {
+                await Promise.all(names.slice(i, i + concurrency).map(lookupMPByName));
+                // Re-render progressively every batch
+                filterList();
             }
         }
 
@@ -161,6 +184,9 @@
             updateStats();
             renderList(allMPs);
             document.getElementById('last-updated').textContent = 'Updated moments ago';
+
+            // Look up each MP in the Parliament API
+            loadParliamentData(allMPs.map(mp => mp.name));
         }
 
         function updateStats() {
@@ -234,10 +260,7 @@
         document.getElementById('search-input').addEventListener('input', filterList);
 
         // Load on start
-        window.onload = () => {
-            loadParliamentData();
-            loadData();
-        };
+        window.onload = loadData;
     </script>
 </body>
 
