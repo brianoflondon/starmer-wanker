@@ -1,5 +1,5 @@
 {
-  "updated": "2026-05-12T14:58:07.385701+00:00",
+  "updated": "2026-05-12T15:27:30.219811+00:00",
   "members": {
     "sarah owen": {
       "id": 4777,
@@ -356,6 +356,10 @@
     "graeme downie": {
       "id": 5275,
       "constituency": "Dunfermline and Dollar"
+    },
+    "zubir ahmed": {
+      "id": 5213,
+      "constituency": "Glasgow South West"
     }
   }
 }
