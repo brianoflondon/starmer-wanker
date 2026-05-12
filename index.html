@@ -198,26 +198,26 @@
                 const titleCell = String(row[2] || '').trim();
                 if (!nameCell) return;
 
-                const titleNormalized = titleCell.toUpperCase();
-                if (titleNormalized === 'PRE-SPEECH' || titleNormalized === 'POST-SPEECH') return;
-
                 const name = nameCell.includes(',') ? nameCell.split(',')[0].trim() : nameCell;
 
                 let extraTitle = '';
                 if (titleCell) {
-                    const parts = titleCell.split(',').map(part => part.trim()).filter(Boolean);
-                    const ministerPart = parts.find(part => /minister/i.test(part));
-                    const chairPart = parts.find(part => /chair of/i.test(part));
-                    const ppsPart = parts.find(part => /\bpps\b/i.test(part));
+                    const normalizedTitle = titleCell.trim().toUpperCase();
+                    if (normalizedTitle !== 'POST-SPEECH') {
+                        const parts = titleCell.split(',').map(part => part.trim()).filter(Boolean);
+                        const ministerPart = parts.find(part => /minister/i.test(part));
+                        const chairPart = parts.find(part => /chair of/i.test(part));
+                        const ppsPart = parts.find(part => /\bpps\b/i.test(part));
 
-                    if (ministerPart) {
-                        extraTitle = 'Minister';
-                    } else if (chairPart) {
-                        extraTitle = chairPart;
-                    } else if (ppsPart && parts.length > 1) {
-                        extraTitle = parts[parts.length - 1];
-                    } else {
-                        extraTitle = parts[0] || '';
+                        if (ministerPart) {
+                            extraTitle = 'Minister';
+                        } else if (chairPart) {
+                            extraTitle = chairPart;
+                        } else if (ppsPart && parts.length > 1) {
+                            extraTitle = parts[parts.length - 1];
+                        } else {
+                            extraTitle = parts[0] || '';
+                        }
                     }
                 }
 
