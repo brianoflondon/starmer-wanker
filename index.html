@@ -147,12 +147,14 @@
             rows.forEach((row, index) => {
                 if (index === 0) return; // Skip header
 
-                const nameCell = row[0] || '';
-                if (!nameCell.trim()) return;
+                const number = String(row[0] || '').trim();
+                const nameCell = String(row[1] || '').trim();
+                if (!nameCell) return;
 
-                const name = nameCell.includes(',') ? nameCell.split(',')[0].trim() : nameCell.trim();
+                const name = nameCell.includes(',') ? nameCell.split(',')[0].trim() : nameCell;
 
                 allMPs.push({
+                    number: number,
                     name: name,
                     raw: nameCell
                 });
@@ -180,9 +182,10 @@
 
             const html = mpList.map(mp => {
                 const member = parliamentMembers[mp.name.toLowerCase()];
+                const displayName = mp.number ? `${mp.name} (${mp.number})` : mp.name;
                 const nameHtml = member
-                    ? `<a href="https://members.parliament.uk/member/${member.id}" target="_blank" rel="noopener" class="hover:text-red-400 underline decoration-red-900/50 underline-offset-2 transition-colors">${mp.name}</a>`
-                    : mp.name;
+                    ? `<a href="https://members.parliament.uk/member/${member.id}" target="_blank" rel="noopener" class="hover:text-red-400 underline decoration-red-900/50 underline-offset-2 transition-colors">${displayName}</a>`
+                    : displayName;
                 const constituencyHtml = member?.constituency
                     ? `<div class="text-sm text-zinc-400 mt-1">${member.constituency}</div>`
                     : '';
