@@ -31,9 +31,15 @@ def fetch_mp_names() -> list[str]:
     reader = csv.reader(io.StringIO(text))
     names = []
     for i, row in enumerate(reader):
-        if i == 0 or not row or not row[0].strip():
+        if i == 0 or not row:
             continue
-        cell = row[0].strip()
+        cell = ""
+        if len(row) > 1 and row[1].strip():
+            cell = row[1].strip()
+        elif row[0].strip():
+            cell = row[0].strip()
+        if not cell:
+            continue
         name = cell.split(",")[0].strip() if "," in cell else cell
         if name:
             names.append(name)
