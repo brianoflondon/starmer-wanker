@@ -108,8 +108,46 @@
     <script>
         let allMPs = [];
         let currentSort = 'reverse';
-        let parliamentMembers = {}; // normalised name -> { id }
+        let parliamentMembers = {}; // normalised name -> { id, constituency }
 
+        const parliamentMemberExceptions = {
+            'chris hinchcliff': {
+                id: 5244,
+                constituency: 'North East Hertfordshire'
+            },
+            'catheine west': {
+                id: 4523,
+                constituency: 'Hornsey and Friern Barnet'
+            },
+            'abitsam mohamed': {
+                id: 5142,
+                constituency: 'Sheffield Central'
+            },
+            'antonia antoniazzi': {
+                id: 4623,
+                constituency: 'Gower'
+            },
+            'rebecca long-bailey': {
+                id: 4396,
+                constituency: 'Salford'
+            }
+        };
+
+        const correctedDisplayNames = {
+            'chris hinchcliff': 'Chris Hinchliff',
+            'catheine west': 'Catherine West',
+            'abitsam mohamed': 'Abtisam Mohamed',
+            'antonia antoniazzi': 'Tonia Antoniazzi'
+        };
+
+        function getParliamentMember(name) {
+            const key = name.toLowerCase();
+            return parliamentMembers[key] || parliamentMemberExceptions[key];
+        }
+
+        function getDisplayName(name) {
+            return correctedDisplayNames[name.toLowerCase()] || name;
+        }
 
         async function loadParliamentData() {
             try {
@@ -189,8 +227,9 @@
             }
 
             const html = mpList.map(mp => {
-                const member = parliamentMembers[mp.name.toLowerCase()];
-                const displayName = mp.number ? `${mp.name} (${mp.number})` : mp.name;
+                const member = getParliamentMember(mp.name);
+                const correctedName = getDisplayName(mp.name);
+                const displayName = mp.number ? `${correctedName} (${mp.number})` : correctedName;
                 const nameHtml = member
                     ? `<a href="https://members.parliament.uk/member/${member.id}" target="_blank" rel="noopener" class="hover:text-red-400 underline decoration-red-900/50 underline-offset-2 transition-colors">${displayName}</a>`
                     : displayName;
@@ -219,8 +258,9 @@
 
             if (searchTerm) {
                 filtered = filtered.filter(mp => {
-                    const nameMatch = mp.name.toLowerCase().includes(searchTerm);
-                    const member = parliamentMembers[mp.name.toLowerCase()];
+                    const correctedName = getDisplayName(mp.name).toLowerCase();
+                    const nameMatch = mp.name.toLowerCase().includes(searchTerm) || correctedName.includes(searchTerm);
+                    const member = getParliamentMember(mp.name);
                     const constituencyMatch = member?.constituency?.toLowerCase().includes(searchTerm);
                     return nameMatch || constituencyMatch;
                 });
