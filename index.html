@@ -151,7 +151,11 @@
             rows.forEach((row, index) => {
                 if (index === 0) return; // Skip header
 
-                const number = String(row[0] || '').trim();
+                const rawNumber = String(row[0] || '').trim();
+                const numberValue = Number(rawNumber);
+                const number = Number.isFinite(numberValue)
+                    ? String(numberValue - 1)
+                    : rawNumber;
                 const nameCell = String(row[1] || '').trim();
                 if (!nameCell) return;
 
