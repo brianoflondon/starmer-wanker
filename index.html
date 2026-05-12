@@ -50,6 +50,10 @@
                 <a href="https://peakd.com/brianoflondon" target="_blank" class="underline">(Hive)</a>
             </p>
             <div class="flex items-center justify-center gap-4 mt-6 text-sm">
+                <div class="flex items-center gap-2 bg-white/10 px-4 py-2 rounded-full">
+                    <div class="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
+                    <span id="last-updated">Loading...</span>
+                </div>
                 <a href="https://docs.google.com/spreadsheets/d/1OBYlmRwHPlRa9Lsk6nTGlgX7Ixn1C3oX6v-f6ogZDEI"
                     target="_blank" class="flex items-center gap-2 text-red-200 hover:text-white transition-colors">
                     <i class="fa-solid fa-sheet"></i>
@@ -166,6 +170,7 @@
 
             updateStats();
             filterList();
+            document.getElementById('last-updated').textContent = 'Updated moments ago';
 
             loadParliamentData();
         }
