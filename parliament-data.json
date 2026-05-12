@@ -1,5 +1,5 @@
 {
-  "updated": "2026-05-12T16:48:00.762828+00:00",
+  "updated": "2026-05-12T17:34:56.589651+00:00",
   "members": {
     "sarah owen": {
       "id": 4777,
@@ -360,6 +360,10 @@
     "zubir ahmed": {
       "id": 5213,
       "constituency": "Glasgow South West"
+    },
+    "jen craft": {
+      "id": 5056,
+      "constituency": "Thurrock"
     }
   }
 }
