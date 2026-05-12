@@ -26,7 +26,8 @@
         <div class="hero-bg py-12 px-6 text-center">
             <h1 class="text-5xl font-bold tracking-tight mb-3">Labour MPs Calling for Starmer to Resign</h1>
             <p class="text-xl text-red-200 max-w-md mx-auto">
-                Live-updating list from public tracker • Updated automatically from  <a href="https://www.guido-fawkes.com" target="_blank" class="underline">Guido Fawkes</a> Google Sheet
+                Live-updating list from public tracker • Updated automatically from <a
+                    href="https://www.guido-fawkes.com" target="_blank" class="underline">Guido Fawkes</a> Google Sheet
             </p>
             <div class="flex items-center justify-center gap-4 mt-6 text-sm">
                 <div class="flex items-center gap-2 bg-white/10 px-4 py-2 rounded-full">
@@ -51,8 +52,7 @@
                 </div>
 
                 <div class="flex gap-3 w-full sm:w-auto">
-                    <button onclick="toggleSort()"
-                        id="sort-btn"
+                    <button onclick="toggleSort()" id="sort-btn"
                         class="flex-1 sm:flex-none px-5 py-3 bg-zinc-800 hover:bg-zinc-700 border border-zinc-700 rounded-xl flex items-center justify-center gap-2 transition-colors">
                         <i id="sort-icon" class="fa-solid fa-list-ol"></i>
                         <span id="sort-text" class="hidden sm:inline">Original Order</span>
@@ -88,7 +88,35 @@
     <script>
         let allMPs = [];
         let currentSort = 'original';
+        let parliamentMembers = {}; // normalised name -> { id }
 
+
+        async function loadParliamentData() {
+            try {
+                // Fetch all current Commons members in one call (max 650 seats)
+                const url = 'https://members-api.parliament.uk/api/Members/Search?House=1&IsCurrentMember=true&take=650&skip=0';
+                const response = await fetch(url);
+                const data = await response.json();
+
+                data.items.forEach(item => {
+                    const m = item.value;
+                    const entry = { id: m.id, constituency: m.latestHouseMembership?.membershipFrom || '' };
+                    // Index by display name ("Firstname Lastname") and list name ("Lastname, Firstname")
+                    parliamentMembers[m.nameDisplayAs.toLowerCase()] = entry;
+                    parliamentMembers[m.nameListAs.toLowerCase()] = entry;
+                    // Also index without honorifics (strip leading "Sir ", "Dame ", "Dr ", "Mr ", "Ms ")
+                    const stripped = m.nameDisplayAs.replace(/^(Sir|Dame|Dr|Mr|Mrs|Ms|Miss)\s+/i, '').toLowerCase();
+                    if (stripped !== m.nameDisplayAs.toLowerCase()) {
+                        parliamentMembers[stripped] = entry;
+                    }
+                });
+
+                // Re-render once Parliament data is available
+                if (allMPs.length > 0) filterList();
+            } catch (e) {
+                console.warn('Parliament API unavailable', e);
+            }
+        }
 
         async function loadData() {
             const csvUrl = "https://docs.google.com/spreadsheets/d/1OBYlmRwHPlRa9Lsk6nTGlgX7Ixn1C3oX6v-f6ogZDEI/export?format=csv&gid=0";
@@ -148,16 +176,25 @@
                 return;
             }
 
-            const html = mpList.map(mp => `
+            const html = mpList.map(mp => {
+                const member = parliamentMembers[mp.name.toLowerCase()];
+                const nameHtml = member
+                    ? `<a href="https://members.parliament.uk/member/${member.id}" target="_blank" rel="noopener" class="hover:text-red-400 underline decoration-red-900/50 underline-offset-2 transition-colors">${mp.name}</a>`
+                    : mp.name;
+                const constituencyHtml = member?.constituency
+                    ? `<div class="text-sm text-zinc-400 mt-1">${member.constituency}</div>`
+                    : '';
+                return `
                 <div class="group bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 hover:border-red-900/50 rounded-2xl p-6 mb-4 transition-all flex items-center justify-between">
                     <div>
-                        <div class="text-xl font-semibold">${mp.name}</div>
+                        <div class="text-xl font-semibold">${nameHtml}</div>
+                        ${constituencyHtml}
                     </div>
                     <div class="text-4xl text-zinc-700 group-hover:text-red-600 transition-colors">
                         <i class="fa-solid fa-arrow-right"></i>
                     </div>
-                </div>
-            `).join('');
+                </div>`;
+            }).join('');
 
             container.innerHTML = html;
         }
@@ -197,7 +234,10 @@
         document.getElementById('search-input').addEventListener('input', filterList);
 
         // Load on start
-        window.onload = loadData;
+        window.onload = () => {
+            loadParliamentData();
+            loadData();
+        };
     </script>
 </body>
 
