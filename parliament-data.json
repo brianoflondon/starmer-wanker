@@ -1,5 +1,5 @@
 {
-  "updated": "2026-05-13T07:13:41.758632+00:00",
+  "updated": "2026-05-13T08:15:31.761019+00:00",
   "members": {
     "sarah owen": {
       "id": 4777,
@@ -364,6 +364,10 @@
     "jen craft": {
       "id": 5056,
       "constituency": "Thurrock"
+    },
+    "kevin mckenna": {
+      "id": 5300,
+      "constituency": "Sittingbourne and Sheppey"
     }
   }
 }
