@@ -1,5 +1,5 @@
 {
-  "updated": "2026-05-14T13:34:29.060351+00:00",
+  "updated": "2026-05-14T14:51:50.942712+00:00",
   "members": {
     "sarah owen": {
       "id": 4777,
@@ -376,6 +376,10 @@
     "wes streeting": {
       "id": 4504,
       "constituency": "Ilford North"
+    },
+    "bill esterson": {
+      "id": 4061,
+      "constituency": "Sefton Central"
     }
   }
 }
