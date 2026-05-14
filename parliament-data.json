@@ -1,5 +1,5 @@
 {
-  "updated": "2026-05-14T09:47:52.131327+00:00",
+  "updated": "2026-05-14T10:47:18.731469+00:00",
   "members": {
     "sarah owen": {
       "id": 4777,
@@ -368,6 +368,10 @@
     "kevin mckenna": {
       "id": 5300,
       "constituency": "Sittingbourne and Sheppey"
+    },
+    "andrew ranger": {
+      "id": 5046,
+      "constituency": "Wrexham"
     }
   }
 }
