@@ -1,5 +1,5 @@
 {
-  "updated": "2026-05-15T11:38:01.603423+00:00",
+  "updated": "2026-05-15T12:35:22.681134+00:00",
   "members": {
     "sarah owen": {
       "id": 4777,
@@ -384,6 +384,14 @@
     "rosie wrighting": {
       "id": 5331,
       "constituency": "Kettering"
+    },
+    "james frith": {
+      "id": 4637,
+      "constituency": "Bury North"
+    },
+    "liam conlon": {
+      "id": 5132,
+      "constituency": "Beckenham and Penge"
     }
   }
 }
