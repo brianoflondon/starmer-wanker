@@ -1,5 +1,5 @@
 {
-  "updated": "2026-05-15T09:01:44.110537+00:00",
+  "updated": "2026-05-15T10:47:09.530283+00:00",
   "members": {
     "sarah owen": {
       "id": 4777,
@@ -380,6 +380,10 @@
     "bill esterson": {
       "id": 4061,
       "constituency": "Sefton Central"
+    },
+    "rosie wrighting": {
+      "id": 5331,
+      "constituency": "Kettering"
     }
   }
 }
