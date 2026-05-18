@@ -1,8 +1,8 @@
 name: Update Parliament Data
 
 on:
-  schedule:
-    - cron: "0 * * * *"   # every hour
+  # schedule:
+  #   - cron: "0 * * * *"   # every hour
   push:
     paths:
       - "scripts/update_parliament_data.py"
